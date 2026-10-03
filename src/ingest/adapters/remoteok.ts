@@ -22,6 +22,7 @@ export async function fetchRemoteOkApi(source: FeedSource): Promise<NormalizedJo
       "User-Agent": "Jobhunt/1.0",
       Accept: "application/json",
     },
+    signal: AbortSignal.timeout(25000),
   });
 
   if (!response.ok) {

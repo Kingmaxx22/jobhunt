@@ -60,7 +60,10 @@ export async function enrichGreenhouseDescriptions(
     try {
       const res = await fetch(
         `https://boards-api.greenhouse.io/v1/boards/${m[1]}/jobs/${m[2]}?questions=false`,
-        { headers: { "User-Agent": "Jobhunt/1.0", Accept: "application/json" } }
+        {
+          headers: { "User-Agent": "Jobhunt/1.0", Accept: "application/json" },
+          signal: AbortSignal.timeout(20000),
+        }
       );
       if (!res.ok) continue;
       const detail = (await res.json()) as { contents?: string };

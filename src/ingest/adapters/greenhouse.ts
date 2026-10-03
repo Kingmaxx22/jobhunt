@@ -28,6 +28,7 @@ function toIso(d?: string): string | null {
 export async function fetchGreenhouseApi(source: FeedSource): Promise<NormalizedJob[]> {
   const res = await fetch(source.url, {
     headers: { "User-Agent": "Jobhunt/1.0", Accept: "application/json" },
+    signal: AbortSignal.timeout(25000),
   });
   if (!res.ok) throw new Error(`Greenhouse API request failed: ${res.status} ${res.statusText}`);
   const data = (await res.json()) as GreenhouseResponse;

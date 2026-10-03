@@ -92,6 +92,7 @@ export async function sendTelegramMessage(
       "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
+    signal: AbortSignal.timeout(20000),
   });
 
   return (await response.json()) as { ok: boolean; description?: string };
@@ -103,6 +104,7 @@ export async function answerTelegramCallback(token: string, callbackId: string, 
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ callback_query_id: callbackId, text: text || "Saved" }),
+      signal: AbortSignal.timeout(15000),
     });
   } catch {
     // best effort

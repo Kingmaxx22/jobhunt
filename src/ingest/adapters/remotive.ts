@@ -68,6 +68,7 @@ export async function fetchRemotiveApi(source: FeedSource): Promise<NormalizedJo
       "User-Agent": "Jobhunt/1.0",
       Accept: "application/json",
     },
+    signal: AbortSignal.timeout(25000),
   });
 
   if (!response.ok) {

@@ -30,6 +30,7 @@ export async function fetchJobicyApi(source: FeedSource): Promise<NormalizedJob[
     : `${source.url}${source.url.includes("?") ? "&" : "?"}count=50`;
   const res = await fetch(url, {
     headers: { "User-Agent": "Jobhunt/1.0", Accept: "application/json" },
+    signal: AbortSignal.timeout(25000),
   });
   if (!res.ok) throw new Error(`Jobicy API request failed: ${res.status} ${res.statusText}`);
   const data = (await res.json()) as JobicyResponse;

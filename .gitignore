@@ -91,3 +91,11 @@ cv/
 # Versioned schema/migrations stay tracked.
 *.sql
 !migrations/*.sql
+
+# Graphify: commit the graph + wiki + report so other agents can navigate
+# without reading every file. Cache, visualizations and local feedback
+# memory stay local (regenerate with `graphify update .` / `export html`).
+graphify-out/cache/
+graphify-out/*.html
+graphify-out/memory/
+graphify-out/reflections/

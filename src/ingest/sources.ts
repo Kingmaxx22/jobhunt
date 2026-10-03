@@ -13,6 +13,8 @@ export async function fetchRss(source: FeedSource): Promise<NormalizedJob[]> {
       "User-Agent": "Jobhunt/1.0",
       Accept: "application/rss+xml, application/xml, text/xml",
     },
+    // A hanging source must never kill the whole tick (cf. WWR 503s/hangs).
+    signal: AbortSignal.timeout(25000),
   });
 
   if (!response.ok) {

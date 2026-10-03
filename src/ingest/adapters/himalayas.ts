@@ -31,6 +31,7 @@ export async function fetchHimalayasApi(source: FeedSource): Promise<NormalizedJ
     : `${source.url}${source.url.includes("?") ? "&" : "?"}limit=20`;
   const res = await fetch(url, {
     headers: { "User-Agent": "Jobhunt/1.0", Accept: "application/json" },
+    signal: AbortSignal.timeout(25000),
   });
   if (!res.ok) throw new Error(`Himalayas API request failed: ${res.status} ${res.statusText}`);
   const data = (await res.json()) as HimalayasResponse;
